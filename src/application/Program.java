@@ -8,6 +8,7 @@ import java.util.Scanner;
 import entities.Contract;
 import entities.Installment;
 import services.ContractService;
+import services.PaypalService;
 
 public class Program {
 	public static void main(String[] args) {
@@ -30,16 +31,14 @@ public class Program {
 		int parcelas = sc.nextInt();
 		
 		
-		ContractService contractService = new ContractService(null);
+		ContractService contractService = new ContractService(new PaypalService());
 		
 		contractService.processContract(obj, parcelas);
 		
-		System.out.printf("Parcelas: ");
+		System.out.printf("Parcelas: \n");
 		for (Installment installment :obj.getInstallments() ) {
 			System.out.println(installment);
-		}
-		
-		
+		}	
 		
 		sc.close();		
 	}
